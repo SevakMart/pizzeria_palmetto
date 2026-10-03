@@ -1,1 +1,3 @@
 # pizzeria_palmetto
+
+this is simple java project for pizzeria palmetto. this project is created for learning purpose. this project is created using java and maven. this project is created using spring boot framework. this project is created using h2 database. this project is created using thymeleaf template engine. this project is created using bootstrap framework. this project is created using jpa and hibernate. this project is created using lombok library. this project is created using junit and mockito for testing.
