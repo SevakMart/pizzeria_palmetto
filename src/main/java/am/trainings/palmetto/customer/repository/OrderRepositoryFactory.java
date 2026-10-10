@@ -15,10 +15,6 @@ public class OrderRepositoryFactory extends AbstractRepositoryFactory {
         ORDER_REPOSITORY_MAP.put(RepositoryTypes.IN_MEMORY, InMemoryOrderRepository.getInstance());
     }
 
-    public OrderRepositoryFactory getInstance() {
-        return new OrderRepositoryFactory();
-    }
-
     public OrderRepository getRepositoryByType(RepositoryTypes type) {
 
         OrderRepository orderRepository = ORDER_REPOSITORY_MAP.get(type);

@@ -15,10 +15,6 @@ public class CustomerRepositoryFactory extends AbstractRepositoryFactory {
         CUSTOMER_REPOSITORY_MAP.put(RepositoryTypes.IN_MEMORY, InMemoryCustomerRepository.getInstance());
     }
 
-    public CustomerRepositoryFactory getInstance() {
-        return new CustomerRepositoryFactory();
-    }
-
     public CustomerRepository getRepositoryByType(RepositoryTypes type) {
 
         CustomerRepository customerRepository = CUSTOMER_REPOSITORY_MAP.get(type);

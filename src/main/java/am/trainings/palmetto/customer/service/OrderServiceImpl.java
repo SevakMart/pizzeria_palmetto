@@ -13,21 +13,23 @@ import java.util.Map;
 public class OrderServiceImpl implements OrderService {
 
 
-    private final CustomerRepository customerRepository =
-            new ApplicationContextHolder<CustomerRepository>().getObject(CustomerRepository.class);
+    private final CustomerRepository customerRepository;
 
 
-    private final OrderRepository orderRepository =
-            new ApplicationContextHolder<OrderRepository>().getObject(OrderRepository.class);
+    private final OrderRepository orderRepository;
 
+    public OrderServiceImpl(ApplicationContextHolder contextHolder) {
+        this.customerRepository = contextHolder.getObject(CustomerRepository.class);
+        this.orderRepository = contextHolder.getObject(OrderRepository.class);
+    }
 
+    @Override
     public long orderPizza(String username, Map<Pizza, Integer> pizzas) {
 
         Customer customer = customerRepository.findCustomerByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User not found: " + username));
 
         Order order = new Order(customer.getCustomerId(), pizzas);
-        long savedId = orderRepository.save(order);
-        return savedId;
+        return orderRepository.save(order);
     }
 }

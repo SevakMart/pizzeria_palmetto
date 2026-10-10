@@ -5,28 +5,32 @@ import am.trainings.palmetto.customer.repository.CustomerRepositoryFactory;
 import am.trainings.palmetto.customer.repository.OrderRepository;
 import am.trainings.palmetto.customer.repository.OrderRepositoryFactory;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
-public class ApplicationContextHolder<T> {
+public final class ApplicationContextHolder {
 
-    private static final RepositoryTypes REPOSITORY_TYPE = RepositoryTypes.IN_MEMORY;
+    private final RepositoryTypes repositoryType = RepositoryTypes.IN_MEMORY;
 
-    private static final Map<Class, Object> CONTEXT = new HashMap<>();
-
-    static {
-        CONTEXT.put(CustomerRepository.class, new CustomerRepositoryFactory());
-        CONTEXT.put(OrderRepository.class, new OrderRepositoryFactory());
-    }
+    private static final Map<Class<?>, Object> CONTEXT = Map.of(
+            CustomerRepository.class, new CustomerRepositoryFactory(),
+            OrderRepository.class, new OrderRepositoryFactory()
+    );
 
 
-    public T getObject(Class<T> clazz) {
+    public <T> T getObject(Class<T> clazz) {
+        Object entry = CONTEXT.get(clazz);
 
-        Object o = CONTEXT.get(clazz);
-        if (o instanceof AbstractRepositoryFactory) {
-            return  (T)((AbstractRepositoryFactory) o).getRepositoryByType(REPOSITORY_TYPE);
+        if (entry == null) {
+            throw new NoSuchElementException("No object registered for type: " + clazz.getName());
         }
 
-        return null;
+        if (entry instanceof AbstractRepositoryFactory factory) {
+            Object repo = factory.getRepositoryByType(repositoryType);
+            return clazz.cast(repo); // safer than (T)
+        }
+
+        // allow direct instances too
+        return clazz.cast(entry);
     }
 }
