@@ -1,4 +1,4 @@
-package am.trainings;
+package am.trainings.palmetto.customer;
 
 public class InplaceOrder extends Order {
     private String tableNumber;
