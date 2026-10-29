@@ -1,4 +1,4 @@
-package am.trainings;
+package am.trainings.palmetto.pizza;
 
 
 public enum PizzaType {
