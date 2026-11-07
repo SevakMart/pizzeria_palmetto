@@ -27,6 +27,10 @@ public class Pizza {
         return name;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public String[] getIngredients() {
         return ingredients;
     }

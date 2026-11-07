@@ -8,6 +8,7 @@ import am.trainings.palmetto.customer.repository.CustomerRepository;
 import am.trainings.palmetto.customer.repository.OrderRepository;
 import am.trainings.palmetto.pizza.Pizza;
 
+import java.util.List;
 import java.util.Map;
 
 public class OrderServiceImpl implements OrderService {
@@ -29,7 +30,13 @@ public class OrderServiceImpl implements OrderService {
         Customer customer = customerRepository.findCustomerByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User not found: " + username));
 
-        Order order = new Order(customer.getCustomerId(), pizzas);
+        Order order = new Order();
+        order.setCustomerId(customer.getCustomerId());
+        order.setPizzas(pizzas);
         return orderRepository.save(order);
+    }
+
+    public List<Order> findAll() {
+        return orderRepository.findAll();
     }
 }

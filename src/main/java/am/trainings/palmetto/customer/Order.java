@@ -14,8 +14,8 @@ import java.util.Map;
 public class Order {
 
     private Long orderId;
-    private final Long customerId;
-    private final Map<Pizza, Integer> pizzas;
+    private Long customerId;
+    private Map<Pizza, Integer> pizzas;
 
     public void addPizza(Pizza pizza, int count) {
         pizzas.put(pizza, count);
