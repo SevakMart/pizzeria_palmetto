@@ -2,6 +2,7 @@ package am.trainings.palmetto.customer.repository;
 
 import am.trainings.palmetto.common.AbstractRepositoryFactory;
 import am.trainings.palmetto.common.RepositoryTypes;
+import am.trainings.palmetto.common.db.ConnectionFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ public class CustomerRepositoryFactory extends AbstractRepositoryFactory {
 
     static {
         CUSTOMER_REPOSITORY_MAP.put(RepositoryTypes.IN_MEMORY, InMemoryCustomerRepository.getInstance());
+        CUSTOMER_REPOSITORY_MAP.put(RepositoryTypes.DATABASE, new JdbcCustomerRepository(ConnectionFactory.getInstance()));
     }
 
     public CustomerRepository getRepositoryByType(RepositoryTypes type) {

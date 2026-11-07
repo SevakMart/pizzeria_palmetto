@@ -2,6 +2,7 @@ package am.trainings.palmetto.customer.repository;
 
 import am.trainings.palmetto.common.AbstractRepositoryFactory;
 import am.trainings.palmetto.common.RepositoryTypes;
+import am.trainings.palmetto.common.db.ConnectionFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ public class OrderRepositoryFactory extends AbstractRepositoryFactory {
 
     static {
         ORDER_REPOSITORY_MAP.put(RepositoryTypes.IN_MEMORY, InMemoryOrderRepository.getInstance());
+        ORDER_REPOSITORY_MAP.put(RepositoryTypes.DATABASE, new JdbcOrderRepository(ConnectionFactory.getInstance()));
     }
 
     public OrderRepository getRepositoryByType(RepositoryTypes type) {

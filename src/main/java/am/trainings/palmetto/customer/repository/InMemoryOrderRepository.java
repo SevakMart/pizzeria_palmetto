@@ -3,6 +3,7 @@ package am.trainings.palmetto.customer.repository;
 import am.trainings.palmetto.customer.Order;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -33,6 +34,10 @@ public class InMemoryOrderRepository implements OrderRepository {
         order.setOrderId(orderId);
         orders.put(orderId, order);
         return orderId;
+    }
+
+    public List<Order> findAll() {
+        return List.copyOf(orders.values());
     }
 
 

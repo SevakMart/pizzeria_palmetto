@@ -24,6 +24,13 @@ public class Pizerria {
 
         Pizza regular = Pizza.REGULAR;
         orderService.orderPizza("sevakmart", Map.of(regular, 3));
+
+
+        orderService.findAll().forEach(order -> {
+            System.out.println("Order ID: " + order.getOrderId());
+            System.out.println("Customer ID: " + order.getCustomerId());
+            System.out.println("Pizzas: " + order.getPizzas());
+        });
     }
 
     private static void registerCustomer(ApplicationContextHolder applicationContextHolder) {
