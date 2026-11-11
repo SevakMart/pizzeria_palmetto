@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- bean definitions here -->
+
+    <context:component-scan base-package="am.trainings.palmetto"/>
+    <beans>
+
+
+<!--        <bean name="OrderRepository" class="am.trainings.palmetto.customer.repository.JdbcOrderRepository"-->
+<!--              lazy-init="true" scope="prototype">-->
+<!--            <constructor-arg name="connectionFactory" ref="ConnectionFactory"/>-->
+<!--        </bean>-->
+
+<!--        <bean name="ConnectionFactory" class="am.trainings.palmetto.common.db.ConnectionFactory">-->
+<!--            <property name="url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1"/>-->
+<!--            <property name="user" value="sa"/>-->
+<!--            <property name="password" value=""/>-->
+<!--        </bean>-->
+
+    </beans>
+</beans>
