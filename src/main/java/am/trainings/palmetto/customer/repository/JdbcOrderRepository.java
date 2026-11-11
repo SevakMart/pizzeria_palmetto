@@ -4,6 +4,8 @@ import am.trainings.palmetto.common.DataAccessException;
 import am.trainings.palmetto.common.db.ConnectionFactory;
 import am.trainings.palmetto.customer.Order;
 import am.trainings.palmetto.pizza.Pizza;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,10 +15,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-// java se - standard edition
-// java ee - enterprise edition
-// java me - micro edition
-// java database connectivity
+
+
 public class JdbcOrderRepository implements OrderRepository {
 
     private static final String INSERT_ORDER_SQL = "INSERT INTO orders (customer_id) VALUES (?)";
@@ -27,6 +27,7 @@ public class JdbcOrderRepository implements OrderRepository {
     private final ConnectionFactory connectionFactory;
 
     public JdbcOrderRepository(ConnectionFactory connectionFactory) {
+        System.out.println("In JdbcOrderRepository constructor");
         this.connectionFactory = connectionFactory;
     }
 
@@ -56,9 +57,9 @@ public class JdbcOrderRepository implements OrderRepository {
     public List<Order> findAll() {
 
         try (
-             Connection connection = ConnectionFactory.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ORDERS_SQL);
-        ){
+                Connection connection = connectionFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ORDERS_SQL);
+        ) {
             statement.execute();
             try (ResultSet rs = statement.getResultSet()) {
                 List<Order> orders = new ArrayList<>();
@@ -74,8 +75,7 @@ public class JdbcOrderRepository implements OrderRepository {
                 return orders;
             }
 
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new DataAccessException("Cannot find all orders", e);
         }
     }

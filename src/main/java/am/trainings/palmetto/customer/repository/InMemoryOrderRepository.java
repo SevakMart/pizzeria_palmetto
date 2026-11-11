@@ -1,29 +1,21 @@
 package am.trainings.palmetto.customer.repository;
 
 import am.trainings.palmetto.customer.Order;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 
-// dao - data access object
+@Component
 public class InMemoryOrderRepository implements OrderRepository {
 
     private final Map<Long, Order> orders = new HashMap<>();
-    private static InMemoryOrderRepository INSTANCE = null;
-
-    private InMemoryOrderRepository() {
+    public InMemoryOrderRepository() {
+        System.out.println("InMemoryOrderRepository created");
     }
 
-    public static InMemoryOrderRepository getInstance() {
-        if (Objects.isNull(INSTANCE)) {
-            INSTANCE = new InMemoryOrderRepository();
-        }
-
-        return INSTANCE;
-    }
 
 
     private Long initialOrderId = 0L;

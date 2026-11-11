@@ -13,7 +13,7 @@ public class OrderRepositoryFactory extends AbstractRepositoryFactory {
     private static final Map<RepositoryTypes, OrderRepository> ORDER_REPOSITORY_MAP = new HashMap<>();
 
     static {
-        ORDER_REPOSITORY_MAP.put(RepositoryTypes.IN_MEMORY, InMemoryOrderRepository.getInstance());
+//        ORDER_REPOSITORY_MAP.put(RepositoryTypes.IN_MEMORY, InMemoryOrderRepository.getInstance());
         ORDER_REPOSITORY_MAP.put(RepositoryTypes.DATABASE, new JdbcOrderRepository(ConnectionFactory.getInstance()));
     }
 

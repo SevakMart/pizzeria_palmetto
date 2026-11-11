@@ -1,11 +1,15 @@
 package am.trainings.palmetto;
 
+import am.trainings.palmetto.common.AppConfig;
 import am.trainings.palmetto.common.ApplicationContextHolder;
 import am.trainings.palmetto.customer.Customer;
 import am.trainings.palmetto.customer.repository.CustomerRepository;
 import am.trainings.palmetto.customer.service.OrderService;
 import am.trainings.palmetto.customer.service.OrderServiceImpl;
 import am.trainings.palmetto.pizza.Pizza;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Map;
 
@@ -17,10 +21,13 @@ import java.util.Map;
 public class Pizerria {
 
     public static void main(String[] args) {
-        ApplicationContextHolder applicationContextHolder = new ApplicationContextHolder();
-        registerCustomer(applicationContextHolder);
+//        ApplicationContextHolder applicationContextHolder = new ApplicationContextHolder();
+//        registerCustomer(applicationContextHolder);
 
-        OrderService orderService = new OrderServiceImpl(applicationContextHolder);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        OrderService orderService = applicationContext.getBean(OrderService.class);
+
 
         Pizza regular = Pizza.REGULAR;
         orderService.orderPizza("sevakmart", Map.of(regular, 3));
