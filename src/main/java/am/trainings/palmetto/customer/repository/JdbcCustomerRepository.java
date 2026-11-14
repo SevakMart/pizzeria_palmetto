@@ -4,6 +4,7 @@ import am.trainings.palmetto.common.DataAccessException;
 import am.trainings.palmetto.common.db.ConnectionFactory;
 import am.trainings.palmetto.customer.Customer;
 import am.trainings.palmetto.customer.exceptions.DuplicateUsernameException;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 // sql injections
+@Component
 public class JdbcCustomerRepository implements CustomerRepository {
 
     // prepare statement is parametrized
