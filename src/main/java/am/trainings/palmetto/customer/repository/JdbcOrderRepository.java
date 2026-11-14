@@ -4,8 +4,8 @@ import am.trainings.palmetto.common.DataAccessException;
 import am.trainings.palmetto.common.db.ConnectionFactory;
 import am.trainings.palmetto.customer.Order;
 import am.trainings.palmetto.pizza.Pizza;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +19,8 @@ import java.util.Map;
 
 public class JdbcOrderRepository implements OrderRepository {
 
+    private static final Logger log = LoggerFactory.getLogger(JdbcOrderRepository.class);
+
     private static final String INSERT_ORDER_SQL = "INSERT INTO orders (customer_id) VALUES (?)";
     private static final String SELECT_ALL_ORDERS_SQL = "SELECT * FROM orders";
     private static final String INSERT_ITEM_SQL =
@@ -27,7 +29,7 @@ public class JdbcOrderRepository implements OrderRepository {
     private final ConnectionFactory connectionFactory;
 
     public JdbcOrderRepository(ConnectionFactory connectionFactory) {
-        System.out.println("In JdbcOrderRepository constructor");
+        log.debug("JdbcOrderRepository created");
         this.connectionFactory = connectionFactory;
     }
 
